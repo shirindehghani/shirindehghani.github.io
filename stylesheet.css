@@ -135,3 +135,10 @@ span.highlight {
   overflow: hidden;
   display: inline-block;
 }
+.hoverZoomLink img {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
