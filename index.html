@@ -88,30 +88,62 @@
       #hamburger-btn {
         display: block !important;
       }
+      #nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.55);
+        z-index: 200;
+        transition: opacity 0.3s;
+        backdrop-filter: blur(6px) brightness(0.8);
+        -webkit-backdrop-filter: blur(6px) brightness(0.8);
+      }
+      #nav-overlay.active {
+        display: block;
+        opacity: 1;
+      }
+      body.menu-open > *:not(nav):not(#nav-overlay):not(#nav-links) {
+        pointer-events: none !important;
+        user-select: none !important;
+        opacity: 0.15 !important;
+        filter: blur(2px) grayscale(0.2);
+      }
       #nav-links {
         display: none !important;
         flex-direction: column !important;
         gap: 16px !important;
         background: #f8f9fa;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100vw;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        padding: 24px 0 16px 0;
-        z-index: 102;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        max-width: 340px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        padding: 48px 24px 48px 24px;
+        z-index: 201;
+        border-radius: 16px;
         transition: all 0.25s cubic-bezier(.4,2,.6,1);
+        filter: none !important;
+        opacity: 1 !important;
+        -webkit-font-smoothing: antialiased;
+        font-smooth: always;
       }
       #nav-links.open {
         display: flex !important;
       }
       #nav-links li a {
-        font-size: 18px !important;
-      }
-      #nav-overlay {
-        display: none;
-      }
-      #nav-overlay.active {
+        font-size: 15px !important;
+        font-weight: 500;
+        color: #222 !important;
+        text-shadow: none !important;
+        -webkit-font-smoothing: antialiased;
+        font-smooth: always;
+        padding: 8px 18px !important;
+        border-radius: 12px;
         display: block;
       }
     }
@@ -128,8 +160,12 @@
         btn.setAttribute('aria-expanded', !expanded);
         if(nav.classList.contains('open')) {
           overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          document.body.classList.add('menu-open');
         } else {
           overlay.classList.remove('active');
+          document.body.style.overflow = '';
+          document.body.classList.remove('menu-open');
         }
       });
       overlay.addEventListener('click', function() {
@@ -137,6 +173,8 @@
         btn.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
         overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
       });
     });
   </script>
