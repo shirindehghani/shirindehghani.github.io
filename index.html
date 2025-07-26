@@ -5,13 +5,20 @@
   <meta name="author" content="Shirin Dehghani">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
 </head>
 <body>
   <!-- Top Navigation Bar -->
-  <nav style="width:100%;background:#f8f9fa;border-bottom:1px solid #e5e5e5;padding:28px 0 24px 0;">
-    <div style="max-width:900px;margin:0 auto;">
-      <ul style="display:flex;justify-content:center;align-items:center;gap:40px;list-style:none;padding:0;margin:0;">
+  <nav style="width:100%;background:#f8f9fa;border-bottom:1px solid #e5e5e5;padding:28px 0 24px 0;position:relative;">
+    <div style="max-width:900px;margin:0 auto;position:relative;">
+      <!-- Hamburger button for mobile -->
+      <button id="hamburger-btn" class="hamburger" aria-label="Open navigation" aria-expanded="false" style="display:none;position:absolute;left:16px;top:18px;background:none;border:none;padding:12px 12px;cursor:pointer;z-index:101;outline:none;">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div id="nav-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:100;"></div>
+      <ul id="nav-links" style="display:flex;justify-content:center;align-items:center;gap:40px;list-style:none;padding:0;margin:0;">
         <li><a href="blog.html" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Blogs</a></li>
         <li><a href="mailto:shirin.dehghani1996@gmail.com" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Email</a></li>
         <li><a href="https://scholar.google.com/citations?user=mneJiOoAAAAJ&hl=en" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Google Scholar</a></li>
@@ -33,16 +40,101 @@
       color: #222;
       line-height: 1.7;
     }
+    .hamburger {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+    }
+    .hamburger .bar {
+      display: block;
+      width: 28px;
+      height: 3px;
+      margin: 4px 0;
+      background: #222;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .hamburger.open .bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open .bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    @media (max-width: 600px) {
+      #hamburger-btn {
+        display: block !important;
+      }
+      #nav-links {
+        display: none !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        background: #f8f9fa;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100vw;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        padding: 24px 0 16px 0;
+        z-index: 102;
+        transition: all 0.25s cubic-bezier(.4,2,.6,1);
+      }
+      #nav-links.open {
+        display: flex !important;
+      }
+      #nav-links li a {
+        font-size: 18px !important;
+      }
+      #nav-overlay {
+        display: none;
+      }
+      #nav-overlay.active {
+        display: block;
+      }
+    }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('hamburger-btn');
+      var nav = document.getElementById('nav-links');
+      var overlay = document.getElementById('nav-overlay');
+      btn.addEventListener('click', function() {
+        nav.classList.toggle('open');
+        btn.classList.toggle('open');
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        if(nav.classList.contains('open')) {
+          overlay.classList.add('active');
+        } else {
+          overlay.classList.remove('active');
+        }
+      });
+      overlay.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('active');
+      });
+    });
+  </script>
   <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
     <tr style="padding:0px">
       <td style="padding:0px"> 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <tr style="padding:0px">
             <td style="padding:2.5%;width:63%;vertical-align:middle" class="main-content-slim">
-              <p style="text-align:center">
-                <name>Shirin Dehghani</name>
-              </p>
+              <div class="profile-header-mobile">
+                <span><name>Shirin Dehghani</name></span>
+              </div>
               <p>
                 I am an AI Engineer at <a href="https://snappshop.ir/">Snapp!Shop</a>, with prior experience as a Data Scientist at <a href="https://metodata.com">Metodata</a>. My expertise includes fine-tuning large language models, prompt engineering, and developing AI-driven solutions for data enrichment, conversational AI, and recommender systems.
               </p>

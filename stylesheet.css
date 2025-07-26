@@ -142,3 +142,51 @@ span.highlight {
   border-radius: 50%;
   display: block;
 }
+
+@media (max-width: 600px) {
+  body, td, th, tr, p, a, strong, heading, papertitle, name {
+    font-size: 12px !important;
+  }
+  table, tbody, tr, td {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block;
+    box-sizing: border-box;
+  }
+  .main-content-slim {
+    font-size: 12px !important;
+    padding: 0 8px;
+  }
+  .hoverZoomLink img {
+    width: 160px !important;
+    height: 160px !important;
+    max-width: 90vw !important;
+  }
+  nav ul {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  nav, .main-content-slim, footer, .main-content-slim article {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .profile-header-mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .profile-header-mobile name {
+    font-size: 20px !important;
+  }
+  .profile-header-mobile .hoverZoomLink img {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+  }
+  td[style*='width:40%'], td[style*='max-width:40%'] {
+    display: none !important;
+  }
+}
