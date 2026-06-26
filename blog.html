@@ -1,76 +1,129 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Shirin Dehghani - Blog</title>
+  <meta charset="UTF-8">
+  <title>Foundations of Reinforcement Learning in LLMs — Shirin Dehghani</title>
   <meta name="author" content="Shirin Dehghani">
+  <meta name="description" content="An accessible introduction to reinforcement learning and RLHF for large language models.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
-  <style>
-    .main-content-slim {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      color: #222;
-      line-height: 1.7;
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
 </head>
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Shirin Dehghani</name>
-              </p>
-              <p style="text-align:center">
-                <a href="index.html">&larr; Back to Home</a>
-              </p>
-              <hr>
-              <h1 style="text-align:center;font-size:1.6rem;font-weight:700;margin-top:24px;margin-bottom:8px;">Foundations of Reinforcement Learning in Large Language Models</h1>
-              <div class="main-content-slim">
-                <article style="margin-top:32px;max-width:700px;margin-left:auto;margin-right:auto;">
-                  <div style="text-align:center;margin-bottom:18px;">
-                    <img src="images/blog_image1.png" alt="Decoder-Only Transformer Training Process" style="max-width:420px;width:100%;">
-                  </div>
-                  <h2 style="font-size:20px;margin-bottom:8px;">Basics of Reinforcement Learning for LLMs</h2>
-                  <p>
-                    When we talk about training large language models (LLMs), most people immediately think of supervised learning—feeding a model lots of examples and letting it learn from labeled data. But there’s another, increasingly important approach: <b>reinforcement learning</b> (RL), and more specifically, <b>reinforcement learning from human feedback</b> (RLHF).
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">What is Reinforcement Learning?</h3>
-                  <p>
-                    At its core, RL is about learning through trial and error—much like how we humans learn new skills. Imagine a child learning to ride a bike: they try, wobble, maybe fall, but gradually get better as they receive feedback (sometimes in the form of scraped knees!). In RL, an <b>agent</b> (the learner) interacts with an <b>environment</b>, takes actions, and receives <b>rewards</b> (positive or negative) based on those actions. The goal? Maximize the total reward over time.
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">Why Not Just Use Supervised Learning?</h3>
-                  <p>
-                    Supervised learning is great when you have clear, labeled data. But what if the feedback is more subjective—like a human saying, "I prefer this answer"? Or what if the reward comes much later, after a series of actions? That’s where RL shines. It lets us optimize for goals that aren’t easily captured by simple labels.
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">How Does RL Work for LLMs?</h3>
-                  <p>
-                    In the context of LLMs, RL is often used after initial supervised training. The model generates responses, and humans (or sometimes other models) provide feedback—ranking, scoring, or otherwise evaluating the outputs. The model then updates its behavior to produce more helpful, honest, or safe responses, based on this feedback. This is the essence of RLHF.
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">A Peek Under the Hood: Markov Decision Processes</h3>
-                  <p>
-                    RL problems are often described using something called a <b>Markov Decision Process</b> (MDP). Don’t let the jargon scare you! An MDP is just a formal way to describe the agent, the environment, the possible actions, the rewards, and how everything changes over time. The agent’s goal is to learn a <b>policy</b>—a strategy for choosing actions that maximize rewards in the long run.
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">Why Does This Matter?</h3>
-                  <p>
-                    RL lets us teach language models to do more than just mimic data—they can learn to align with human values, avoid harmful outputs, and even become more creative or helpful. It’s a powerful tool for making AI not just smarter, but also safer and more aligned with what we want.
-                  </p>
-                  <h3 style="font-size:16px;margin-top:24px;">Final Thoughts</h3>
-                  <p>
-                    Reinforcement learning is a fascinating, sometimes underappreciated, part of the AI toolkit. As LLMs become more central to our digital lives, understanding RL—and how it helps models learn from human feedback—will be key to building better, more trustworthy AI systems.
-                  </p>
-                </article>
-              </div>
-            </td>
-          </tr>
-        </tbody></table>
-      </td>
-    </tr>
-  </tbody></table>
+  <!-- ===== Navigation ===== -->
+  <header class="nav">
+    <nav class="nav__inner" aria-label="Primary">
+      <a href="index.html" class="nav__brand">Shirin Dehghani</a>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="blog.html">Writing</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        </button>
+        <button id="hamburger-btn" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="article">
+        <a href="index.html" class="article__back">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+          Back to home
+        </a>
+
+        <header class="article__header">
+          <h1 class="article__title">Foundations of Reinforcement Learning in Large Language Models</h1>
+          <p class="article__meta">By Shirin Dehghani · Reinforcement Learning</p>
+        </header>
+
+        <figure class="article__figure">
+          <img src="images/blog_image1.png" alt="Decoder-only transformer training process">
+          <figcaption>The decoder-only transformer training process.</figcaption>
+        </figure>
+
+        <div class="article__body">
+          <h2>Basics of Reinforcement Learning for LLMs</h2>
+          <p>
+            When we talk about training large language models (LLMs), most people immediately think of supervised learning—feeding a model lots of examples and letting it learn from labeled data. But there's another, increasingly important approach: <b>reinforcement learning</b> (RL), and more specifically, <b>reinforcement learning from human feedback</b> (RLHF).
+          </p>
+
+          <h3>What is Reinforcement Learning?</h3>
+          <p>
+            At its core, RL is about learning through trial and error—much like how we humans learn new skills. Imagine a child learning to ride a bike: they try, wobble, maybe fall, but gradually get better as they receive feedback (sometimes in the form of scraped knees!). In RL, an <b>agent</b> (the learner) interacts with an <b>environment</b>, takes actions, and receives <b>rewards</b> (positive or negative) based on those actions. The goal? Maximize the total reward over time.
+          </p>
+
+          <h3>Why Not Just Use Supervised Learning?</h3>
+          <p>
+            Supervised learning is great when you have clear, labeled data. But what if the feedback is more subjective—like a human saying, "I prefer this answer"? Or what if the reward comes much later, after a series of actions? That's where RL shines. It lets us optimize for goals that aren't easily captured by simple labels.
+          </p>
+
+          <h3>How Does RL Work for LLMs?</h3>
+          <p>
+            In the context of LLMs, RL is often used after initial supervised training. The model generates responses, and humans (or sometimes other models) provide feedback—ranking, scoring, or otherwise evaluating the outputs. The model then updates its behavior to produce more helpful, honest, or safe responses, based on this feedback. This is the essence of RLHF.
+          </p>
+
+          <h3>A Peek Under the Hood: Markov Decision Processes</h3>
+          <p>
+            RL problems are often described using something called a <b>Markov Decision Process</b> (MDP). Don't let the jargon scare you! An MDP is just a formal way to describe the agent, the environment, the possible actions, the rewards, and how everything changes over time. The agent's goal is to learn a <b>policy</b>—a strategy for choosing actions that maximize rewards in the long run.
+          </p>
+
+          <h3>Why Does This Matter?</h3>
+          <p>
+            RL lets us teach language models to do more than just mimic data—they can learn to align with human values, avoid harmful outputs, and even become more creative or helpful. It's a powerful tool for making AI not just smarter, but also safer and more aligned with what we want.
+          </p>
+
+          <h3>Final Thoughts</h3>
+          <p>
+            Reinforcement learning is a fascinating, sometimes underappreciated, part of the AI toolkit. As LLMs become more central to our digital lives, understanding RL—and how it helps models learn from human feedback—will be key to building better, more trustworthy AI systems.
+          </p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>&copy; <span id="year"></span> Shirin Dehghani</span> &mdash; Inspired by <a href="https://jonbarron.info">Jon Barron</a>'s website.
+    </div>
+  </footer>
+
+  <script>
+    var btn = document.getElementById('hamburger-btn');
+    var links = document.getElementById('nav-links');
+    btn.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+
+    var toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
-</html> 
+</html>

@@ -1,230 +1,222 @@
-<!DOCTYPE HTML>
-
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Shirin Dehghani</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shirin Dehghani — AI Engineer & Researcher</title>
   <meta name="author" content="Shirin Dehghani">
+  <meta name="description" content="Shirin Dehghani is an AI Engineer and researcher working on large language models, NLP, and ethical AI.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Shirin Dehghani — AI Engineer & Researcher">
+  <meta property="og:description" content="AI Engineer specializing in large language models, NLP, and ethical AI.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+  <script>
+    // Apply saved theme before paint to avoid flash.
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
 </head>
 <body>
-  <!-- Top Navigation Bar -->
-  <nav style="width:100%;background:#f8f9fa;border-bottom:1px solid #e5e5e5;padding:28px 0 24px 0;position:relative;">
-    <div style="max-width:900px;margin:0 auto;position:relative;">
-      <!-- Hamburger button for mobile -->
-      <button id="hamburger-btn" class="hamburger" aria-label="Open navigation" aria-expanded="false" style="display:none;position:absolute;left:16px;top:18px;background:none;border:none;padding:12px 12px;cursor:pointer;z-index:101;outline:none;">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      <div id="nav-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:100;"></div>
-      <ul id="nav-links" style="display:flex;justify-content:center;align-items:center;gap:40px;list-style:none;padding:0;margin:0;">
-        <li><a href="blog.html" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Blogs</a></li>
-        <li><a href="mailto:shirin.dehghani1996@gmail.com" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Email</a></li>
-        <li><a href="https://scholar.google.com/citations?user=mneJiOoAAAAJ&hl=en" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Google Scholar</a></li>
-        <li><a href="https://x.com/ShinDehghani" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">X</a></li>
-        <li><a href="https://github.com/shirindehghani" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Github</a></li>
-        <li><a href="https://medium.com/@shirindehghani" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">Medium</a></li>
-        <li><a href="https://www.linkedin.com/in/shirindehghani/" style="font-family:'Lato',Verdana,Helvetica,sans-serif;font-size:16px;color:#222;text-decoration:none;font-weight:500;transition:color 0.2s;">LinkedIn</a></li>
+  <!-- ===== Navigation ===== -->
+  <header class="nav">
+    <nav class="nav__inner" aria-label="Primary">
+      <a href="#top" class="nav__brand">Shirin Dehghani</a>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="blog.html">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
+
+      <div class="nav__actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        </button>
+        <button id="hamburger-btn" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="container">
+
+      <!-- ===== Hero ===== -->
+      <section class="hero" id="about">
+        <div class="hero__bio">
+          <h1 class="hero__name">Shirin Dehghani</h1>
+          <p class="hero__role">AI Engineer · NLP &amp; Large Language Models</p>
+          <p>
+            I am an AI Engineer at <a href="https://snappshop.ir/">Snapp!Shop</a>, with prior experience as a Data Scientist at <a href="https://metodata.com">Metodata</a>. My work centers on fine-tuning large language models, prompt engineering, and building AI-driven solutions for data enrichment, conversational AI, and recommender systems.
+          </p>
+          <p>
+            My research interests span NLP, LLMs, reinforcement learning, and human–AI interaction, with a focus on reliability, bias, and ethical AI in social sciences, healthcare, and finance.
+          </p>
+
+          <div class="socials">
+            <a class="social-btn" href="mailto:shirin.dehghani1996@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg>
+              Email
+            </a>
+            <a class="social-btn" href="https://scholar.google.com/citations?user=mneJiOoAAAAJ&hl=en">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+              Scholar
+            </a>
+            <a class="social-btn" href="https://github.com/shirindehghani">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.44 9.63 8.21 11.19.6.11.82-.25.82-.56v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.38-1.34-1.74-1.34-1.74-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.07 1.8 2.81 1.28 3.5.98.11-.77.42-1.28.76-1.58-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.35 1.23-3.18-.12-.3-.53-1.51.12-3.15 0 0 1-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.29-1.53 3.29-1.21 3.29-1.21.65 1.64.24 2.85.12 3.15.77.83 1.23 1.89 1.23 3.18 0 4.54-2.81 5.53-5.49 5.83.43.37.81 1.1.81 2.22v3.29c0 .31.21.68.83.56C20.57 21.91 24 17.5 24 12.29 24 5.78 18.63.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a class="social-btn" href="https://www.linkedin.com/in/shirindehghani/">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+            <a class="social-btn" href="https://medium.com/@shirindehghani">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42S20.96 8.46 20.96 12zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+              Medium
+            </a>
+            <a class="social-btn" href="https://x.com/ShinDehghani">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.6l5.24 6.93zm-1.29 19.5h2.04L6.48 3.24H4.29z"/></svg>
+              X
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__photo">
+          <a href="images/prof_pic.jpg">
+            <img src="images/prof_pic.jpg" alt="Portrait of Shirin Dehghani">
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== Experience ===== -->
+      <section class="section" id="experience">
+        <h2 class="section__title">Experience</h2>
+        <div class="timeline">
+          <div class="entry">
+            <div class="entry__period">Present</div>
+            <div>
+              <h3 class="entry__title">AI Engineer</h3>
+              <p class="entry__org"><a href="https://snappshop.ir/">Snapp!Shop</a></p>
+              <p class="entry__desc">Fine-tuning large language models and building AI-driven solutions for conversational AI, data enrichment, and recommender systems.</p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry__period">Previously</div>
+            <div>
+              <h3 class="entry__title">Data Scientist</h3>
+              <p class="entry__org"><a href="https://metodata.com">Metodata</a></p>
+              <p class="entry__desc">Developed data-driven models and analytics pipelines to support business and product decisions.</p>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry__period">Research</div>
+            <div>
+              <h3 class="entry__title">Research Collaborator</h3>
+              <p class="entry__org"><a href="https://www.unipd.it/en/">University of Padua</a></p>
+              <p class="entry__desc">Collaborated on recommender systems research, with a focus on the ethical implications of AI technologies.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Education ===== -->
+      <section class="section" id="education">
+        <h2 class="section__title">Education</h2>
+        <div class="timeline">
+          <div class="entry">
+            <div class="entry__period">M.Sc.</div>
+            <div>
+              <h3 class="entry__title">Master's in Artificial Intelligence</h3>
+              <p class="entry__org"><a href="https://atu.ac.ir/en">Allameh Tabataba'i University</a></p>
+              <p class="entry__desc">Researched LLM embeddings for Persian stance detection under <a href="https://scholar.google.co.uk/citations?user=l6adwNEAAAAJ&hl=en">Dr. Mohammad Reza A. Oskoei</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Research interests ===== -->
+      <section class="section" id="research">
+        <h2 class="section__title">Research Interests</h2>
+        <div class="tags">
+          <span class="tag">Natural Language Processing</span>
+          <span class="tag">Large Language Models</span>
+          <span class="tag">Multimodal AI</span>
+          <span class="tag">Reinforcement Learning</span>
+          <span class="tag">Human–AI Interaction</span>
+          <span class="tag">Ethical &amp; Reliable AI</span>
+        </div>
+      </section>
+
+      <!-- ===== Writing ===== -->
+      <section class="section" id="writing">
+        <h2 class="section__title">Selected Writing</h2>
+        <div class="card-grid">
+          <a class="card" href="blog.html">
+            <div class="card__meta">Blog · Reinforcement Learning</div>
+            <h3 class="card__title">Foundations of Reinforcement Learning in Large Language Models</h3>
+            <p class="card__excerpt">An accessible introduction to reinforcement learning and RLHF, and why they matter for building safer, more aligned language models.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== Contact ===== -->
+      <section class="section" id="contact">
+        <h2 class="section__title">Get in Touch</h2>
+        <p>
+          I'm always open to discussing research, collaborations, or interesting ideas in AI. The best way to reach me is by
+          <a href="mailto:shirin.dehghani1996@gmail.com">email</a>, or connect with me on
+          <a href="https://www.linkedin.com/in/shirindehghani/">LinkedIn</a>.
+        </p>
+      </section>
+
     </div>
-  </nav>
-  <style>
-    nav ul li a:hover {
-      color: #1772d0 !important;
-      text-decoration: underline !important;
-    }
-    .main-content-slim {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
-      color: #222;
-      line-height: 1.7;
-    }
-    .hamburger {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 101;
-      transition: box-shadow 0.2s;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .hamburger:focus {
-      outline: 2px solid #1772d0;
-      outline-offset: 2px;
-    }
-    .hamburger:hover {
-      background: #f0f4fa;
-      box-shadow: 0 2px 8px rgba(23,114,208,0.08);
-    }
-    .hamburger .bar {
-      display: block;
-      width: 28px;
-      height: 3px;
-      margin: 4px 0;
-      background: linear-gradient(90deg, #1772d0 0%, #222 100%);
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s, background 0.3s;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.07);
-    }
-    .hamburger.open .bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-      background: #1772d0;
-    }
-    .hamburger.open .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.open .bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-      background: #1772d0;
-    }
-    @media (max-width: 600px) {
-      #hamburger-btn {
-        display: block !important;
-      }
-      #nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.55);
-        z-index: 200;
-        transition: opacity 0.3s;
-        backdrop-filter: blur(6px) brightness(0.8);
-        -webkit-backdrop-filter: blur(6px) brightness(0.8);
-      }
-      #nav-overlay.active {
-        display: block;
-        opacity: 1;
-      }
-      body.menu-open > *:not(nav):not(#nav-overlay):not(#nav-links) {
-        pointer-events: none !important;
-        user-select: none !important;
-        opacity: 0.15 !important;
-        filter: blur(2px) grayscale(0.2);
-      }
-      #nav-links {
-        display: none !important;
-        flex-direction: column !important;
-        gap: 16px !important;
-        background: #f8f9fa;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90vw;
-        max-width: 340px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-        padding: 48px 24px 48px 24px;
-        z-index: 201;
-        border-radius: 16px;
-        transition: all 0.25s cubic-bezier(.4,2,.6,1);
-        filter: none !important;
-        opacity: 1 !important;
-        -webkit-font-smoothing: antialiased;
-        font-smooth: always;
-      }
-      #nav-links.open {
-        display: flex !important;
-      }
-      #nav-links li a {
-        font-size: 15px !important;
-        font-weight: 500;
-        color: #222 !important;
-        text-shadow: none !important;
-        -webkit-font-smoothing: antialiased;
-        font-smooth: always;
-        padding: 8px 18px !important;
-        border-radius: 15px;
-        display: block;
-      }
-    }
-  </style>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>&copy; <span id="year"></span> Shirin Dehghani</span> &mdash; Inspired by <a href="https://jonbarron.info">Jon Barron</a>'s website.
+    </div>
+  </footer>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var btn = document.getElementById('hamburger-btn');
-      var nav = document.getElementById('nav-links');
-      var overlay = document.getElementById('nav-overlay');
-      btn.addEventListener('click', function() {
-        nav.classList.toggle('open');
-        btn.classList.toggle('open');
-        var expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', !expanded);
-        if(nav.classList.contains('open')) {
-          overlay.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          document.body.classList.add('menu-open');
-        } else {
-          overlay.classList.remove('active');
-          document.body.style.overflow = '';
-          document.body.classList.remove('menu-open');
-        }
-      });
-      overlay.addEventListener('click', function() {
-        nav.classList.remove('open');
+    // Mobile menu
+    var btn = document.getElementById('hamburger-btn');
+    var links = document.getElementById('nav-links');
+    btn.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+    links.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        links.classList.remove('open');
         btn.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        document.body.classList.remove('menu-open');
-      });
+      }
     });
+
+    // Theme toggle
+    var toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px"> 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle" class="main-content-slim">
-              <div class="profile-header-mobile">
-                <span><name>Shirin Dehghani</name></span>
-              </div>
-              <p>
-                I am an AI Engineer at <a href="https://snappshop.ir/">Snapp!Shop</a>, with prior experience as a Data Scientist at <a href="https://metodata.com">Metodata</a>. My expertise includes fine-tuning large language models, prompt engineering, and developing AI-driven solutions for data enrichment, conversational AI, and recommender systems.
-              </p>
-              <p>
-                I hold a Master’s in Artificial Intelligence from <a href="https://atu.ac.ir/en">Allameh Tabataba’i University</a>, where I researched LLM embeddings for Persian stance detection under <a href="https://scholar.google.co.uk/citations?user=l6adwNEAAAAJ&hl=en">Dr. Mohammad Reza A. Oskoei</a>.
-              </p>
-              <p>
-                My research interests include NLP, LLMs, reinforcement learning, and human-AI interaction, with a focus on reliability, bias, and ethical AI in social sciences, healthcare, and finance.
-              </p>
-              <p>
-                I have collaborated with the <a href="https://www.unipd.it/en/">University of Padua</a> on recommender systems and am passionate about the ethical implications of AI technologies.
-              </p>
-              <!-- Remove the old social/contact links here -->
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/prof_pic.jpg"><img style="width:320px;max-width:320px" alt="profile photo" src="images/prof_pic.jpg" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
-        <hr>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle"> 
-              <heading><b style="font-size:16px;">Research Interests</b></heading> 
-              <ul style="font-size:12px;margin:8px 0 0 18px;">
-                <li>Natural Language Processing (NLP)</li>
-                <li>Large Language Models (LLM)</li>
-                <li>Multimodal AI</li>
-                <li>Reinforcement Learning</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody></table>
-        <hr>
-        <footer style="width:100%;background:#f8f9fa;padding:20px 0 10px 0;margin-top:40px;border-top:1px solid #e5e5e5;">
-          <div style="max-width:800px;margin:0 auto;text-align:center;font-size:13px;color:#999;letter-spacing:0.02em;">
-            <span style="font-weight:500;">&copy; Shirin Dehghani</span> &mdash; Inspired by <a style="color:#999;text-decoration:underline;" href="https://jonbarron.info">Jon Barron</a>'s website with the help of AI.
-          </div>
-        </footer>
-    </body>
+</body>
 </html>
