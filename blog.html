@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Foundations of Reinforcement Learning in LLMs — Sherin Dehghani</title>
   <meta name="author" content="Sherin Dehghani">
-  <meta name="description" content="An accessible introduction to reinforcement learning and RLHF for large language models.">
+  <meta name="description" content="A clear, practical guide to how reinforcement learning aligns large language models — from the RLHF pipeline to modern alternatives like DPO and RLAIF, and the pitfalls in between.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
@@ -52,49 +52,118 @@
 
         <header class="article__header">
           <h1 class="article__title">Foundations of Reinforcement Learning in Large Language Models</h1>
-          <p class="article__meta">By Sherin Dehghani · Reinforcement Learning</p>
+          <p class="article__meta">By Sherin Dehghani · Reinforcement Learning &amp; Alignment · 9 min read</p>
         </header>
+
+        <p class="article__lead">
+          A pretrained language model can write fluent text, but fluency isn't the same as being helpful, honest, or safe. Reinforcement learning is the bridge between a model that <em>predicts</em> language and one that <em>behaves</em> the way we want. Here's how that bridge is built.
+        </p>
 
         <figure class="article__figure">
           <img src="images/blog_image1.png" alt="Decoder-only transformer training process">
-          <figcaption>The decoder-only transformer training process.</figcaption>
+          <figcaption>A decoder-only transformer learns to predict the next token — the starting point before any alignment.</figcaption>
         </figure>
 
         <div class="article__body">
-          <h2>Basics of Reinforcement Learning for LLMs</h2>
+          <h2>From prediction to behavior</h2>
           <p>
-            When we talk about training large language models (LLMs), most people immediately think of supervised learning—feeding a model lots of examples and letting it learn from labeled data. But there's another, increasingly important approach: <b>reinforcement learning</b> (RL), and more specifically, <b>reinforcement learning from human feedback</b> (RLHF).
+            Most people first meet large language models (LLMs) through <b>supervised learning</b>: show the model billions of examples and train it to predict the next token. This is remarkably powerful, but it optimizes for one thing — <em>imitating</em> its training data. It does not, on its own, teach a model to prefer a helpful answer over a plausible-sounding but useless one.
+          </p>
+          <p>
+            The problem is that the qualities we actually care about — helpfulness, honesty, harmlessness — are hard to write down as labels. There's rarely a single "correct" answer to compare against, and human preferences are subtle and context-dependent. This is exactly the gap that <b>reinforcement learning</b> (RL), and specifically <b>reinforcement learning from human feedback</b> (RLHF), was designed to close.
           </p>
 
-          <h3>What is Reinforcement Learning?</h3>
+          <h2>Reinforcement learning in one minute</h2>
           <p>
-            At its core, RL is about learning through trial and error—much like how we humans learn new skills. Imagine a child learning to ride a bike: they try, wobble, maybe fall, but gradually get better as they receive feedback (sometimes in the form of scraped knees!). In RL, an <b>agent</b> (the learner) interacts with an <b>environment</b>, takes actions, and receives <b>rewards</b> (positive or negative) based on those actions. The goal? Maximize the total reward over time.
+            RL is learning through trial and error. An <b>agent</b> interacts with an <b>environment</b>, takes <b>actions</b>, and receives <b>rewards</b> that tell it how well it's doing. Over time it refines a <b>policy</b> — a strategy for choosing actions — to maximize the total reward it expects to collect.
+          </p>
+          <p>
+            Mapping this onto a language model is surprisingly clean:
+          </p>
+          <ul>
+            <li><b>Agent / policy</b> — the LLM itself, deciding which token to generate next.</li>
+            <li><b>State</b> — the prompt plus everything generated so far.</li>
+            <li><b>Action</b> — choosing the next token from the vocabulary.</li>
+            <li><b>Reward</b> — a score for how good the finished response is.</li>
+          </ul>
+          <p>
+            The catch is that last point. Where does a meaningful reward for "this was a good answer" actually come from? That's the heart of RLHF.
           </p>
 
-          <h3>Why Not Just Use Supervised Learning?</h3>
+          <h2>The RLHF pipeline</h2>
           <p>
-            Supervised learning is great when you have clear, labeled data. But what if the feedback is more subjective—like a human saying, "I prefer this answer"? Or what if the reward comes much later, after a series of actions? That's where RL shines. It lets us optimize for goals that aren't easily captured by simple labels.
+            Modern instruction-tuned models are typically aligned in three stages, each building on the previous one.
           </p>
 
-          <h3>How Does RL Work for LLMs?</h3>
+          <h3>1. Supervised fine-tuning (SFT)</h3>
           <p>
-            In the context of LLMs, RL is often used after initial supervised training. The model generates responses, and humans (or sometimes other models) provide feedback—ranking, scoring, or otherwise evaluating the outputs. The model then updates its behavior to produce more helpful, honest, or safe responses, based on this feedback. This is the essence of RLHF.
+            Start with a pretrained base model and fine-tune it on a curated set of high-quality prompt–response pairs written or vetted by humans. This teaches the model the <em>format</em> of being a helpful assistant and gives RL a sensible starting point rather than random behavior.
           </p>
 
-          <h3>A Peek Under the Hood: Markov Decision Processes</h3>
+          <h3>2. Training a reward model</h3>
           <p>
-            RL problems are often described using something called a <b>Markov Decision Process</b> (MDP). Don't let the jargon scare you! An MDP is just a formal way to describe the agent, the environment, the possible actions, the rewards, and how everything changes over time. The agent's goal is to learn a <b>policy</b>—a strategy for choosing actions that maximize rewards in the long run.
+            Instead of asking humans to score every possible answer (slow and inconsistent), we ask them something easier: given two responses to the same prompt, <em>which is better?</em> These pairwise comparisons are used to train a separate <b>reward model</b> that learns to predict human preference as a single scalar score. In effect, we distill fuzzy human judgment into a function the machine can optimize against.
           </p>
 
-          <h3>Why Does This Matter?</h3>
+          <h3>3. Optimizing the policy with RL</h3>
           <p>
-            RL lets us teach language models to do more than just mimic data—they can learn to align with human values, avoid harmful outputs, and even become more creative or helpful. It's a powerful tool for making AI not just smarter, but also safer and more aligned with what we want.
+            Now the loop closes. The SFT model generates responses, the reward model scores them, and an RL algorithm — most famously <b>Proximal Policy Optimization</b> (PPO) — nudges the model's weights toward higher-scoring behavior. Repeat this millions of times and the model gradually shifts from "sounds plausible" to "is actually preferred by people."
+          </p>
+          <p>
+            One crucial detail: we don't let the model drift too far from the SFT version. A <b>KL-divergence penalty</b> keeps the updated policy close to the original distribution. Without it, the model would happily exploit quirks in the reward model and collapse into gibberish that scores highly but reads terribly.
           </p>
 
-          <h3>Final Thoughts</h3>
+          <blockquote>
+            The reward model is a proxy for human preference — and optimizing a proxy too hard is how you get a model that games the metric instead of pleasing the human.
+          </blockquote>
+
+          <h2>Beyond classic RLHF</h2>
           <p>
-            Reinforcement learning is a fascinating, sometimes underappreciated, part of the AI toolkit. As LLMs become more central to our digital lives, understanding RL—and how it helps models learn from human feedback—will be key to building better, more trustworthy AI systems.
+            RLHF works, but it's heavy: it needs a separate reward model, an unstable RL loop, and a lot of compute. Two directions have become popular for reducing that cost.
           </p>
+          <ul>
+            <li>
+              <b>RLAIF (RL from AI Feedback)</b> — replace some human labelers with a capable model that produces preference judgments from a written set of principles. It scales cheaply, at the cost of inheriting the judge model's biases.
+            </li>
+            <li>
+              <b>DPO (Direct Preference Optimization)</b> — skip the reward model and RL loop entirely. DPO reframes preference data as a single classification-style objective you can optimize with ordinary gradient descent. It's simpler and more stable, which is why many recent open models rely on it.
+            </li>
+          </ul>
+
+          <h2>Where it gets hard</h2>
+          <p>
+            Aligning models with RL is powerful but full of sharp edges worth knowing about:
+          </p>
+          <ul>
+            <li><b>Reward hacking</b> — the model finds loopholes that satisfy the reward model without genuinely being better (verbose answers, flattery, confident-sounding nonsense).</li>
+            <li><b>Over-optimization</b> — push the reward too far and real quality starts <em>declining</em> even as the score climbs.</li>
+            <li><b>The alignment tax</b> — heavy alignment can dull a model's raw capabilities, so teams balance helpfulness against safety.</li>
+            <li><b>Preference quality</b> — the whole system inherits the taste, and the blind spots, of whoever produced the comparisons.</li>
+          </ul>
+
+          <div class="callout">
+            <p class="callout__title">Key takeaways</p>
+            <ul>
+              <li>Pretraining teaches models to predict text; RL teaches them to <em>behave</em>.</li>
+              <li>RLHF turns hard-to-label human preferences into an optimizable reward signal.</li>
+              <li>The classic recipe is three stages: SFT → reward model → RL (PPO), with a KL penalty as a safety leash.</li>
+              <li>DPO and RLAIF offer cheaper, simpler paths to the same goal.</li>
+              <li>Alignment is a balancing act — optimize the proxy too hard and you get reward hacking.</li>
+            </ul>
+          </div>
+
+          <h2>Final thoughts</h2>
+          <p>
+            Reinforcement learning is the quiet workhorse behind the assistants we use every day. It's what turns a fluent next-token predictor into something that feels genuinely helpful and reasonably safe. As LLMs move deeper into products — and into agentic systems that take real actions — understanding how they're aligned isn't just academic. It's essential to building AI we can actually trust.
+          </p>
+        </div>
+
+        <div class="article__author">
+          <img src="images/prof_pic.jpg" alt="Sherin Dehghani">
+          <div>
+            <p class="article__author-name">Sherin Dehghani</p>
+            <p class="article__author-bio">AI Software Engineer working on LLMs, AI agents, and alignment. Read more on <a href="https://sherindehghani.medium.com/">Medium</a>.</p>
+          </div>
         </div>
       </article>
     </div>

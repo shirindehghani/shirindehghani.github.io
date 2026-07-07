@@ -524,6 +524,110 @@ main {
   margin-top: 10px;
 }
 
+.article__lead {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--text-soft);
+  margin: 0 0 28px;
+}
+
+.article__body ul,
+.article__body ol {
+  margin: 0 0 20px;
+  padding-left: 24px;
+}
+
+.article__body li {
+  margin-bottom: 8px;
+}
+
+.article__body li::marker {
+  color: var(--accent);
+}
+
+.article__body code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 6px;
+}
+
+.article__body blockquote {
+  margin: 24px 0;
+  padding: 4px 20px;
+  border-left: 3px solid var(--accent);
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+/* Callout / key-takeaways box */
+.callout {
+  font-family: var(--font-sans);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 32px 0;
+}
+
+.callout__title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+
+.callout ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.callout li {
+  font-size: 15.5px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.callout li:last-child {
+  margin-bottom: 0;
+}
+
+/* Author card at the end of an article */
+.article__author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.article__author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.article__author-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+
+.article__author-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-soft);
+  margin: 2px 0 0;
+}
+
 /* ----- Responsive -------------------------------------------------------- */
 @media (max-width: 720px) {
   body { font-size: 15.5px; }
